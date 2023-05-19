@@ -1,0 +1,10 @@
+ion-input {
+  ion-spinner {
+    width: 20px;
+    height: 20px;
+    --color: var(--ion-color-step-300, #b3b3b3);
+    position: absolute;
+    top: 18px;
+    right: 8px;
+  }
+}

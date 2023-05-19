@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="'/reactive-forms-example'"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Custom Validators Example</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="First name"
+        label-placement="floating"
+        fill="outline"
+        formControlName="firstName"
+      ></ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.firstName.errors && controls.firstName.touched"
+      >
+        <span *ngIf="controls.firstName.errors.required"
+          >El campo es requerido</span
+        >
+      </div>
+    </div>
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="First name"
+        label-placement="floating"
+        fill="outline"
+        formControlName="lastName"
+      ></ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.lastName.errors && controls.lastName.touched"
+      >
+        <span *ngIf="controls.lastName.errors.required"
+          >El campo es requerido</span
+        >
+      </div>
+    </div>
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Email"
+        label-placement="floating"
+        fill="outline"
+        formControlName="email"
+      >
+        <ion-spinner *ngIf="controls.email.pending"> </ion-spinner>
+      </ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.email.errors && controls.email.touched"
+      >
+        <span *ngIf="controls.email.errors.required"
+          >El campo es requerido</span
+        >
+        <span *ngIf="controls.email.errors.email"
+          >El campo debe ser un email válido</span
+        >
+        <span *ngIf="controls.email.errors.emailExists"
+          >El email ya se encuentra registrado</span
+        >
+      </div>
+    </div>
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Password"
+        label-placement="floating"
+        fill="outline"
+        formControlName="password"
+        type="password"
+      ></ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.password.errors && controls.password.touched"
+      >
+        <span *ngIf="controls.password.errors.required"
+          >El campo es requerido</span
+        >
+
+        <span *ngIf="controls.password.errors.minlength"
+          >El campo debe tener mínimo 6 caracteres</span
+        >
+      </div>
+    </div>
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Confirm Password"
+        label-placement="floating"
+        fill="outline"
+        formControlName="confirmPassword"
+        type="password"
+      ></ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.confirmPassword.errors && controls.confirmPassword.touched"
+      >
+        <span *ngIf="controls.confirmPassword.errors.required"
+          >El campo es requerido</span
+        >
+        <span
+          *ngIf="!controls.confirmPassword.errors.required && controls.confirmPassword.errors.mustMatch"
+          >Las contraseñas no coinciden</span
+        >
+      </div>
+    </div>
+    <ion-button type="submit" expand="block" shape="round">
+      Registrar
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,124 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="'/reactive-forms-example'"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Advance Example</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <div class="form-control">
+      <ion-item>
+        <ion-select
+          formControlName="numberOfTickets"
+          label="Number of Tickets"
+          label-placement="floating"
+          (ionChange)="onChangeTickets($event)"
+        >
+          <ion-select-option
+            [value]="i"
+            *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"
+            >{{ i }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <div
+        *ngIf="controls.numberOfTickets.errors && controls.numberOfTickets.touched"
+        class="error-messages"
+      >
+        <span *ngIf="controls.numberOfTickets.errors.required">
+          Campo requerido
+        </span>
+      </div>
+    </div>
+    <ng-container *ngFor="let ticket of ticketFormGroups; let i = index">
+      <ion-card style="margin-inline: 0">
+        <ion-card-header>
+          <ion-card-title>Ticket {{i + 1}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div [formGroup]="ticket" class="row">
+            <div class="form-control">
+              <ion-input
+                mode="md"
+                label="Name"
+                label-placement="floating"
+                fill="outline"
+                formControlName="name"
+              ></ion-input>
+              <div
+                *ngIf="ticket.controls.name.errors && ticket.controls.name.touched"
+                class="error-messages"
+              >
+                <span *ngIf="ticket.controls.name.errors.required">
+                  Campo requerido
+                </span>
+              </div>
+            </div>
+
+            <div class="form-control">
+              <ion-input
+                mode="md"
+                label="Email"
+                label-placement="floating"
+                fill="outline"
+                formControlName="email"
+              ></ion-input>
+
+              <div
+                *ngIf="ticket.controls.email.errors && ticket.controls.email.touched"
+                class="error-messages"
+              >
+                <span *ngIf="ticket.controls.email.hasError('required')">
+                  Campo requerido
+                </span>
+                <span *ngIf="ticket.controls.email.hasError('email')">
+                  El campo debe ser un email válido
+                </span>
+
+                <span *ngIf="ticket.controls.email.hasError('duplicateEmail')"
+                  >¡Este correo electrónico está duplicado!</span
+                >
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button
+            type="button"
+            (click)="onSubmit()"
+            expand="block"
+            shape="round"
+          >
+            Buy Tickets
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button
+            type="button"
+            (click)="onReset()"
+            color="danger"
+            expand="block"
+            shape="round"
+          >
+            Cancel
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

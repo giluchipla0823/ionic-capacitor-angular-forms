@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/home'"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reactive Forms Example</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button
+    expand="block"
+    [routerLink]="['/reactive-forms-example/basic-reactive-forms']"
+  >
+    Basic Example
+  </ion-button>
+  <ion-button
+    expand="block"
+    [routerLink]="['/reactive-forms-example/custom-validators-reactive-forms']"
+  >
+    Custom Validators Example
+  </ion-button>
+  <ion-button
+    expand="block"
+    [routerLink]="['/reactive-forms-example/advanced-reactive-forms']"
+  >
+    Advance Example
+  </ion-button>
+</ion-content>

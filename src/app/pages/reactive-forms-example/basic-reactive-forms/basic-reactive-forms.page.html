@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="'/reactive-forms-example'"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Basic Example</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Email"
+        label-placement="floating"
+        fill="outline"
+        formControlName="email"
+      ></ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.email.errors && controls.email.touched"
+      >
+        <span *ngIf="controls.email.errors.required"
+          >El campo es requerido</span
+        >
+        <span *ngIf="controls.email.errors.email"
+          >El campo debe ser un email válido</span
+        >
+      </div>
+    </div>
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Password"
+        label-placement="floating"
+        fill="outline"
+        formControlName="password"
+        type="password"
+      ></ion-input>
+
+      <div
+        class="error-messages"
+        *ngIf="controls.password.errors && controls.password.touched"
+      >
+        <span *ngIf="controls.password.errors.required"
+          >El campo es requerido</span
+        >
+      </div>
+    </div>
+    <ion-button type="submit" expand="block" shape="round"> Entrar </ion-button>
+  </form>
+</ion-content>
