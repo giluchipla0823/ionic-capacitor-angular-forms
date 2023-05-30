@@ -21,14 +21,16 @@ export function duplicateValuesValidator(
         const value = formGroup.value;
         const compareValue = value[matchingControlName];
 
-        if (dataSet.has(compareValue)) {
-          formGroup
-            .get(matchingControlName)
-            .setErrors({ duplicateEmail: true });
-          errors[index] = { duplicateEmail: true };
-        } else {
-          dataSet.add(compareValue);
-          formGroup.get(matchingControlName).setErrors(null);
+        if (compareValue) {
+          if (dataSet.has(compareValue)) {
+            formGroup
+              .get(matchingControlName)
+              .setErrors({ duplicateEmail: true });
+            errors[index] = { duplicateEmail: true };
+          } else {
+            dataSet.add(compareValue);
+            // formGroup.get(matchingControlName).setErrors(null);
+          }
         }
       });
 

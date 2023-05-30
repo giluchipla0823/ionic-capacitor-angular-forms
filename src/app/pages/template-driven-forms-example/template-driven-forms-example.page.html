@@ -1,13 +1,52 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>template-driven-forms-example</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/'"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Template Driven</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">template-driven-forms-example</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Email"
+        name="email"
+        label-placement="floating"
+        fill="outline"
+        ngModel
+        #email="ngModel"
+        required
+        email
+      ></ion-input>
+
+      <div class="error-messages" *ngIf="email.errors && f.submitted">
+        <span *ngIf="email.errors.required">Campo requerido</span>
+        <span *ngIf="email.errors.email"
+          >El campo debe ser un email válido</span
+        >
+      </div>
+    </div>
+
+    <div class="form-control">
+      <ion-input
+        mode="md"
+        label="Password"
+        name="password"
+        label-placement="floating"
+        fill="outline"
+        ngModel
+        #password="ngModel"
+        required
+      ></ion-input>
+
+      <div class="error-messages" *ngIf="password.errors && f.submitted">
+        <span *ngIf="password.errors.required">Campo requerido</span>
+      </div>
+    </div>
+
+    <ion-button type="submit" expand="block" shape="round"> Entrar </ion-button>
+  </form>
 </ion-content>

@@ -70,7 +70,7 @@ export class AdvancedReactiveFormsPage implements OnInit {
     );
   }
 
-  private buildTicketForm() {
+  private buildTicketForm(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

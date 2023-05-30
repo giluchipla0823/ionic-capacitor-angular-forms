@@ -25,7 +25,11 @@ const routes: Routes = [
       import(
         './pages/template-driven-forms-example/template-driven-forms-example.module'
       ).then((m) => m.TemplateDrivenFormsExamplePageModule),
+  },  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
   },
+
 ];
 
 @NgModule({

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { AbstractControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { finalize, pairwise } from 'rxjs';
+import { AuthService } from 'src/app/services/fake/auth.service';
 
 @Component({
   selector: 'app-basic-reactive-forms',
@@ -11,23 +15,56 @@ import { FormBuilder } from '@angular/forms';
 export class BasicReactiveFormsPage implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private loadingController: LoadingController,
+    private alertController: AlertController
+  ) {}
 
   get controls() {
-    return this.form.controls as { [key: string]: any };
+    return this.form.controls as { [key: string]: AbstractControl<any, any> };
   }
 
   ngOnInit(): void {
     this.buildForm();
+
+    this.form
+      .get('email')
+      .valueChanges.pipe(pairwise())
+      .subscribe(([previousValue, newValue]) => {
+        console.log({ previousValue, newValue });
+      });
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    console.log('ON SUBMIT', this.form.value);
+    const loading = await this.loadingController.create({
+      message: 'Verificando...',
+    });
+
+    await loading.present();
+
+    const { email, password } = this.form.value;
+
+    this.authService
+      .login(email, password)
+      .pipe(finalize(() => loading.dismiss()))
+      .subscribe({
+        next: () => this.router.navigate(['/main']),
+        error: async (err) => {
+          const alert = await this.alertController.create({
+            message: err.message,
+          });
+
+          alert.present();
+        },
+      });
   }
 
   private buildForm(): void {
