@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { mustMatchValidator } from 'src/app/validators/must-match.validator';
 import { EmailExistsValidator } from 'src/app/validators/user/email-exists.validator';
 
@@ -17,7 +22,7 @@ export class CustomValidatorsReactiveFormsPage implements OnInit {
   ) {}
 
   get controls() {
-    return this.form.controls as { [key: string]: any };
+    return this.form.controls as { [key: string]: AbstractControl<any, any> };
   }
 
   ngOnInit(): void {

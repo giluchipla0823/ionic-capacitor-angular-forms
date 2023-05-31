@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { duplicateValuesValidator } from 'src/app/validators/duplicated-values.validator';
 
 @Component({
@@ -15,7 +21,7 @@ export class AdvancedReactiveFormsPage implements OnInit {
   }
 
   get controls() {
-    return this.form.controls as { [key: string]: any };
+    return this.form.controls as { [key: string]: AbstractControl<any, any> };
   }
 
   get tickets() {

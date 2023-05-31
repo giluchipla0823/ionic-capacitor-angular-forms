@@ -1,0 +1,35 @@
+[
+    {
+    "key": "email",
+    "type": "input",
+    "options": {
+      "label": "Email",
+      "placeholder": "",
+      "required": true
+    }
+  },
+  {
+    "key": "password",
+    "type": "input",
+    "options": {
+      "label": "Password",
+      "placeholder": "",
+      "required": true,
+      "type": "password"
+    }
+  },
+  {
+    "key": "newsletter",
+    "type": "boolean",
+    "options": {
+      "label": "Subscribe to our newsletter"
+    }
+  },
+  {
+    "key": "notes",
+    "type": "text",
+    "options": {
+      "label": "Additional notes for us"
+    }
+  }
+]

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="'/reactive-forms-example'"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Dynamic Example</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #formEl [formGroup]="form" (ngSubmit)="submitForm()">
+    <ng-container *ngFor="let c of formInputs">
+      <!-- <ion-label position="stacked">{{ c.options.label }}</ion-label> -->
+      <div class="form-control" [ngSwitch]="c.type">
+        <!-- Standard input -->
+        <ion-input
+          *ngSwitchCase="'input'"
+          [type]="c.options.type ? c.options.type : 'text'"
+          [formControlName]="c.key"
+          [placeholder]="c.options.placeholder"
+          mode="md"
+          [label]="c.options.label"
+          label-placement="floating"
+          fill="outline"
+        ></ion-input>
+
+        <!-- Textarea -->
+        <ion-textarea
+          *ngSwitchCase="'text'"
+          rows="3"
+          [formControlName]="c.key"
+          [label]="c.options.label"
+          label-placement="floating"
+          fill="outline"
+        ></ion-textarea>
+
+        <!-- Boolean -->
+        <ion-toggle *ngSwitchCase="'boolean'" [formControlName]="c.key"
+          >{{ c.options.label }}</ion-toggle
+        >
+
+        <app-form-error-messages
+          [control]="controls[c.key]"
+        ></app-form-error-messages>
+      </div>
+    </ng-container>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button type="button" (click)="submitForm()" expand="block"
+      >Submit</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>
