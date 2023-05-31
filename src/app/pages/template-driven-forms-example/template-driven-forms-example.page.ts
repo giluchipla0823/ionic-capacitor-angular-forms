@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./template-driven-forms-example.page.scss'],
 })
 export class TemplateDrivenFormsExamplePage implements OnInit {
+  email: string = '';
   constructor() {}
 
   ngOnInit() {}
@@ -17,5 +18,6 @@ export class TemplateDrivenFormsExamplePage implements OnInit {
     }
 
     console.log('VALID FORM', f.value);
+    console.log('EMAIL VALUE', { email: this.email });
   }
 }

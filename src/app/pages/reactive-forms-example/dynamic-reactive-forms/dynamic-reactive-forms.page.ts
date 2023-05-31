@@ -43,6 +43,7 @@ export class DynamicReactiveFormsPage implements OnInit {
     this.form = this.fb.group({});
 
     this.fakeFormService.getSimpleForm().subscribe((res) => {
+      // console.log();
       this.formInputs = res;
       this.createControls(res);
     });

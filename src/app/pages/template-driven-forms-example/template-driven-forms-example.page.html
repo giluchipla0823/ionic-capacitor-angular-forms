@@ -16,15 +16,15 @@
         name="email"
         label-placement="floating"
         fill="outline"
-        ngModel
-        #email="ngModel"
+        [(ngModel)]="email"
+        #emailEl="ngModel"
         required
         email
       ></ion-input>
 
-      <div class="error-messages" *ngIf="email.errors && f.submitted">
-        <span *ngIf="email.errors.required">Campo requerido</span>
-        <span *ngIf="email.errors.email"
+      <div class="error-messages" *ngIf="emailEl.errors && f.submitted">
+        <span *ngIf="emailEl.errors.required">Campo requerido</span>
+        <span *ngIf="emailEl.errors.email"
           >El campo debe ser un email válido</span
         >
       </div>

@@ -60,8 +60,8 @@ export class CustomValidatorsReactiveFormsPage implements OnInit {
         }),
     */
 
-    /* this.form
-      .get('email')
-      .setAsyncValidators([this.emailExistsValidator.validate()]); */
+    // this.form
+    //   .get('email')
+    //   .setAsyncValidators([this.emailExistsValidator.validate()]);
   }
 }

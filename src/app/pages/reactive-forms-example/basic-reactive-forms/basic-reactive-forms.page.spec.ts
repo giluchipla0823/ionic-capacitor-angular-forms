@@ -78,7 +78,7 @@ describe('BasicReactiveFormsPage', () => {
     expect(button.nativeElement.type).toBe('submit');
   });
 
-  it('should have a form with three fields (email, password and remember_me)', () => {
+  it('should have a form with three fields (email, password)', () => {
     const { form } = component;
 
     expect(form.contains('email')).toBeTruthy();
